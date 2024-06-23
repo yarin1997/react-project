@@ -1,0 +1,21 @@
+.dir{
+    direction: rtl;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+.Card-Container{
+    @apply flex flex-col gap-2 rounded mb-3 ;
+}
+.heart{
+    @apply text-gray-500 text-3xl cursor-pointer;
+}
+
+.grid-Container{
+@apply grid grid-cols-3 gap-2 ;
+}
+
+span{
+    @apply font-bold underline text-lg
+}

@@ -1,0 +1,16 @@
+section{
+    @apply flex justify-center gap-3 ;
+}
+.Cards-Container{
+    @apply flex flex-col gap-2 mb-5 ;
+}
+.grid-con{
+    @apply grid grid-cols-3 gap-2 ;
+}
+
+@media screen and (max-width: 768px) {
+.grid-con{
+    @apply grid grid-cols-1 gap-2 ;
+}
+    
+}

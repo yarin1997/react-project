@@ -1,0 +1,26 @@
+.formContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 55%;
+    input{
+        padding: 10px;
+        border:1px solid rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+        background-color: rgb(199, 229, 229);
+    }
+}
+        input {
+            padding: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            background-color: rgb(74, 206, 201);
+        }
+        @media screen and (max-width: 1000px) {
+            .formContainer{
+                grid-template-columns: 1fr;
+                width: 90%;
+                gap:10px;
+            }
+            
+        }

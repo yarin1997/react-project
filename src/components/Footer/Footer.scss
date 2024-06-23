@@ -1,0 +1,12 @@
+.footer{
+    @apply flex flex-row items-center justify-center gap-5 md:gap-60 
+}
+.about{
+    @apply flex flex-col items-center justify-center
+}
+.button{
+    @apply rounded-full  w-7 h-7
+}
+.profile{
+    color: gray;
+}
