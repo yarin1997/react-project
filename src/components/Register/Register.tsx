@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import './Register.scss'
 import userService from '../../services/user-service';
 import { RegisterUser } from '../../@types/types';

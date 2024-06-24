@@ -7,7 +7,6 @@ import './Card.scss'
    import { BsTelephone } from "react-icons/bs";
 import cardsService from '../../services/cards-service';
 import { useDate } from "../../contexts/ThemeContext";
-import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -30,7 +29,7 @@ export type CardProps2 = {
 };
 
 const Card = ({ card, myCards, setMyCards }: CardProps2) => {
-  const { isLoggedIn, isBusiness, isAdmin, login, logout, _id, token } =
+  const { isLoggedIn, isAdmin, _id, token } =
     useContext(AuthContext);
   const { _id: cardId, image, title, description, phone, address } = card;
   const { theme } = useDate();
@@ -56,6 +55,7 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
 
       })
       .catch((error) => {
+        console.log(error);
         setIsFavorite(!newIsFavorite);
       });
   };

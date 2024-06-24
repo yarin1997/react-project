@@ -4,10 +4,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useDate } from "../../contexts/ThemeContext";
 import  './Footer.scss'
-import React from "react";
 import { NavLink } from "react-router-dom";
 const Footer = () => {
-    const { isLoggedIn, isBusiness, isAdmin, login, logout } =useContext(AuthContext);
+    const { isLoggedIn} =useContext(AuthContext);
     const {theme}=useDate()
   return (
     <>

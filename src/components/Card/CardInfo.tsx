@@ -1,10 +1,8 @@
-import React from 'react'
 import { useLocation } from 'react-router-dom';
 import { useDate } from '../../contexts/ThemeContext';
 import './Card.scss'
 const CardInfo = () => {
    const { VITE_GOOGLE_MAPS_API_KEY: KEY } = import.meta.env;
-    const maps = `https://www.google.com/maps/@32.1449342,34.8955189,15z?entry=ttu`;
     const location = useLocation();
     const data = location.state;
     const {theme}=useDate()

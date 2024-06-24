@@ -11,7 +11,7 @@ import { useDate } from '../../contexts/ThemeContext';
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 const NavBar = () => {
-const { isLoggedIn, isBusiness,isAdmin, login, logout } = useContext(AuthContext);
+const { isLoggedIn, isBusiness,isAdmin,  logout } = useContext(AuthContext);
 const {theme}=useDate()
 const [isOpen, setIsOpen] = useState(false);
 const [loc,setLoc]=useState("")

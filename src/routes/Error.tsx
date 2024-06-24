@@ -6,7 +6,7 @@ type ErrorType = {
   data: string;
 };
 const Error = () => {
-  const { data, status, statusText } = useRouteError() as ErrorType;
+  const { statusText } = useRouteError() as ErrorType;
   return (
     <div id="error-page">
       <h1>Oops!</h1>

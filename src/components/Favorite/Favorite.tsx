@@ -1,5 +1,4 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import cardsService from '../../services/cards-service'
 import Card from '../Card/Card';
 import { CardType } from '../../@types/types';
@@ -34,7 +33,7 @@ const search=useSearch()
         setLoading(false);
         console.error(err);
       });
-  }, [_id,favCards,search]); // Add _id as a dependency to ensure it runs when _id changes
+  }, [_id,favCards,search]);
 
   if (loading) {
     return <div>Loading...</div>;

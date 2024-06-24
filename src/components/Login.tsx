@@ -10,7 +10,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
-import { useStorage } from "../hooks/useStorage";
 
 interface LoginType {
   email: string;

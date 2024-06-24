@@ -5,7 +5,7 @@ export type LoginUser = {
   email: string;
   password: string;
 };
-// type for the object
+
 export type RegisterUser = {
   name: {
     first: string;
@@ -117,5 +117,10 @@ type UserResponse = {
 };
 
 
-// טיפוס לפונקציה שמקבלת ילדים ומחזירה אלמנט של ראקט
+
+
+
+
+
+
 export type FCC = ({ children: ReactNode }) => ReactNode;

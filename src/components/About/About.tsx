@@ -1,4 +1,4 @@
-import React from 'react'
+
 import './About.scss'
 import { useDate } from '../../contexts/ThemeContext';
 const About = () => {

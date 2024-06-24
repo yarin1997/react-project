@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import './Cards.scss'
 import Card from "../Card/Card";
 import { CardType } from "../../@types/types";
-import { CardProps, CircularProgress } from "@mui/material";
+import {  CircularProgress } from "@mui/material";
 import cardsService from "../../services/cards-service";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useSearch } from "../../contexts/SearchBarContext";
@@ -11,7 +11,7 @@ import { useDate } from "../../contexts/ThemeContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const Cards = () => {
-  const { isLoggedIn, isBusiness } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const [cardData, setData] = useState<CardType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
