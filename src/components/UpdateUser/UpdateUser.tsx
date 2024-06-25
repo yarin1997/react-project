@@ -85,7 +85,7 @@ const UpdateUser = () => {
  
    const [loading, setLoading] = useState(false);
    const [generalError, setGeneralError] = useState("");
-    const[myValid,setMyValid]=useState(true)
+    
 
   useEffect(() => {
     if (!_id) return;
