@@ -1,30 +1,55 @@
-# React + TypeScript + Vite
+Business Advertising Web-App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application that includes a website management system that allows business users to publish content. The published content will be available in different parts of the site.
 
-Currently, two official plugins are available:
+Installation
+First install NodeJs: https://nodejs.org/en
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Terminal command:
 
-## Expanding the ESLint configuration
+$ npm create vite
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+cd project
 
-- Configure the top-level `parserOptions` property like this:
+npm install
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+at VSCode at the Terminal: npm run dev
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Tech
+Frontend library for building user interfaces.
+
+HTML/CSS: Structure and styling of components.
+
+JavaScript (TypeScript): Programming language for frontend logic.
+
+React Router: For routing within the application.
+
+LocalStorage API: For storing and retrieving business c
+
+Features
+Create Business Cards: Users can create digital business cards by entering their contact information.
+
+Edit and Delete Cards: Cards can be edited or deleted as needed.
+
+Responsive Design: The application is responsive and works well on different devices.
+
+LocalStorage: Cards are stored in the browser's localStorage for persistence.
+
+DarkMode Toogle button: Byclicking a toggle button the user can change the the bg-color of the app.
+
+Usage
+First, for a full experience i invite you to get register.
+
+After registering al login , a Business card of all category avalible for the user, and there is an option the mark your feavorite by clicking the like icon on the card. if you register as a business user, you entitled to advertise your own business card, by clicking at the icon at the navbar. For edit or delete you should ckick on the icon on the card.
+
+An Admin user has Permissions to change the status of another user from business to unbusiness and vice versa.
+
+Screenshot:
+
+![Screenshot 2024-06-23 010811](https://github.com/yarin1997/Business_card_react/assets/155356573/11b494ad-80bf-407a-80df-9dc3d30f7feb)
+
+Short:
+
+https://github.com/yarin1997/Business_card_react/assets/155356573/1aa2d482-6fad-4ad1-a01c-aa9e904cb83b
+
+
