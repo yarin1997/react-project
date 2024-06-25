@@ -34,6 +34,7 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
   const { _id: cardId, image, title, description, phone, address } = card;
   const { theme } = useDate();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [alt, setAlt] = useState<string>(image.alt);
   useEffect(() => {
     cardsService
       .getCardById(cardId)
@@ -45,6 +46,11 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
      
   }, []);
 
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src =
+      "https://www.computerhope.com/issues/pictures/default.png";
+      setAlt("default.png")
+  };
   const handleLikeClick = () => {
     const newIsFavorite = !isFavorite;
     setIsFavorite(!isFavorite);
@@ -91,8 +97,9 @@ const handleDelete = () => {
     >
       <img
         src={image.url}
-        alt="myimg"
-        className="h-60 rounded "
+        onError={handleError}
+        alt={alt}
+        className=" h-60 rounded "
         onClick={handleDivClick}
       />
       <h1 className="text-3xl font-bold">Title: {title}</h1>
