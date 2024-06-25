@@ -2,11 +2,9 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { Outlet } from "react-router-dom";
 import { useDate } from "../contexts/ThemeContext";
-
 const Root =()=>{
-
   const {theme}=useDate();
-console.log("here")
+
     return (
       <div
         className={`flex flex-col gap-10  text-blue-500  ${
@@ -14,7 +12,6 @@ console.log("here")
         }`}
       >
         <Header  />
-        {/* how to limit the height of the page? */}
         <main className=" w-11/12 m-auto ">
           <Outlet />
         </main>

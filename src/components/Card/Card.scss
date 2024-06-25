@@ -6,15 +6,18 @@
     gap: 1rem;
 }
 .Card-Container{
-    @apply flex flex-col gap-2 rounded mb-3 ;
-}
+    @apply flex flex-col gap-2 rounded mb-3;
+     transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .Card-Container:hover {
+        @apply shadow-lg;
+        transform: scale(1.03);
+    }
 .heart{
     @apply text-gray-500 text-3xl cursor-pointer;
 }
 
-.grid-Container{
-@apply grid grid-cols-3 gap-2 ;
-}
 
 span{
     @apply font-bold underline text-lg

@@ -52,27 +52,33 @@ const ToggleButton=() => {
                 : " bg-white text-gray-800"
             }`}
           >
-            <NavLink to={"/"} className="cursor-pointer text-3xl font-bold">
+            <NavLink
+              to={"/"}
+              className="link cursor-pointer text-3xl font-bold"
+            >
               BCard
             </NavLink>
-            <a href="/About" className="anchor">
+            <a href="/About" className="link anchor">
               ABOUT
             </a>
             {isLoggedIn && (
-              <NavLink to="/Favorites" className={"text-base md:text-2xl "}>
+              <NavLink
+                to="/Favorites"
+                className={"link text-base md:text-2xl "}
+              >
                 Fav
               </NavLink>
             )}
             {isBusiness && (
               <NavLink
                 to="/myCards"
-                className={"text-base md:text-2xl whitespace-nowrap"}
+                className={"link text-base md:text-2xl whitespace-nowrap"}
               >
                 My Cards
               </NavLink>
             )}
             {isAdmin && (
-              <NavLink to="/Admin" className={"text-base md:text-2xl"}>
+              <NavLink to="/Admin" className={"link text-base md:text-2xl"}>
                 CRM
               </NavLink>
             )}
@@ -81,29 +87,29 @@ const ToggleButton=() => {
             <InputSearch />
           )}
           <div
-            className={`flexi${
+            className={`flexi ${
               theme === "dark"
                 ? " bg-gray-800 text-white"
                 : " bg-white text-gray-800"
             }`}
           >
             <DarkModeToggle />
-            <NavLink to="/" className={"fs-5 "}>
+            <NavLink to="/" className={"fs-5 link "}>
               Cards
             </NavLink>
             {!isLoggedIn && (
-              <NavLink to="/register" className={"fs-5 "}>
+              <NavLink to="/register" className={"fs-5 link"}>
                 Register
               </NavLink>
             )}
             {!isLoggedIn && (
-              <NavLink to="/login" className={"fs-5 "}>
+              <NavLink to="/login" className={"fs-5 link"}>
                 Login
               </NavLink>
             )}
             {isLoggedIn && (
               <button
-                className={"fs-5 "}
+                className={"fs-5 link"}
                 onClick={() => {
                   logout();
                   navigate("/login");
@@ -114,13 +120,13 @@ const ToggleButton=() => {
             )}
             {isBusiness && (
               <NavLink to="/createCard">
-                <BsFilePlus className="fs-3" title="create card" />
+                <BsFilePlus className="fs-3 link" title="create card" />
               </NavLink>
             )}
 
             {isLoggedIn && (
               <NavLink to="/user">
-                <RxAvatar className="fs-3 " title="Edit user" />
+                <RxAvatar className="fs-3 link" title="Edit user" />
               </NavLink>
             )}
           </div>

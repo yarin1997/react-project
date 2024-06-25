@@ -67,11 +67,11 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
   };
   const navigate = useNavigate();
   const handleDivClick = () => {
-    const dataToPass = { key: card }; // Data you want to pass
+    const dataToPass = { key: card }; 
     navigate("/CardInfo", { state: dataToPass });
   };
   const handleUpdateCard = () => {
-    const dataToPass = { key: card }; // Data you want to pass
+    const dataToPass = { key: card }; 
     navigate("/EditCard", { state: dataToPass });
   };
 const handleDelete = () => {
@@ -91,8 +91,8 @@ const handleDelete = () => {
 };
   return (
     <div
-      className={`Card-Container cursor-pointer ${
-        theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+      className={`Card-Container cursor-pointer  ${
+        theme === "dark" ? "bg-gray-800 text-white" :"bg-white text-gray-800"
       }`}
     >
       <img
@@ -112,7 +112,7 @@ const handleDelete = () => {
       <hr />
       <p className="card__phone">Phone: {phone}</p>
       <p className="card__adress">City: {address.city}</p>
-   
+
       <div
         className={`d-flex gap-2 align-items-center justify-content-between ${
           theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"

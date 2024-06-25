@@ -4,12 +4,13 @@ import Card from '../Card/Card';
 import { CardType } from '../../@types/types';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useSearch } from '../../contexts/SearchBarContext';
-
+import { useDate } from '../../contexts/ThemeContext';
 const Favorite = () => {
   const [favCards, setFavCards] = useState<CardType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { _id } = useContext(AuthContext);
+  const { theme } = useDate();
 const search=useSearch()
   useEffect(() => {
     if (!_id) return; // Ensure _id is available
@@ -45,7 +46,7 @@ const search=useSearch()
 
   return (
     <>
-      <h1 className="text-center text-3xl m-2">Favorite</h1>
+      <h1 className={`text-center fw-bold text-3xl m-2 ${theme==="dark"?"text-white bg-gray-800":"text-gray-800 bg-white"}`}>Favorite</h1>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {favCards.length === 0 ? (
           <p>No favorite cards found</p>

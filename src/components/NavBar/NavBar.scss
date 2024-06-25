@@ -1,5 +1,5 @@
 .anchor {
-    @apply  text-base font-medium text-base md:text-2xl;
+    @apply  text-base font-medium  md:text-2xl;
 }
 
 .flexi {
@@ -8,6 +8,17 @@
 .menu {
     display: none;
 }
+.link{
+    transition: 0.3s;
+}
+
+   .link:hover {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            transform: scale(1.1);
+            font-weight: bold;
+        }
+
 
 @media screen and (max-width: 768px) {
     .flexi {
@@ -25,7 +36,6 @@
     .icon{
         cursor: pointer;
         margin-right: 10px;
-       
     }
     .menu-items{
 display: flex;

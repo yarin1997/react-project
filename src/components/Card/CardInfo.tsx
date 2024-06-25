@@ -8,7 +8,7 @@ const CardInfo = () => {
     const {theme}=useDate()
  return (
    <div
-     className={`text-center gap-2 ${
+     className={`text-center gap-2 d-flex flex-column justift-content-center align-items-center ${
        theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
      }`}
      key={data._id}
@@ -18,11 +18,11 @@ const CardInfo = () => {
        alt={data.key.image.alt}
        className="w-2/3 m-auto rounded-md mt-2 md:w-1/3"
      />
-     <div className="d-flex flex-column gap-2">
+     <div className="d-flex flex-column gap-2 align-items-start text-left">
        <h1>
          <span>Title:</span> {data.key.title}
        </h1>
-       <h2>
+       <h2 >
          <span>Subtitle:</span> {data.key.subtitle}
        </h2>
        <p>

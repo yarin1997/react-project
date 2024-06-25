@@ -1,4 +1,4 @@
-import  { useContext, useEffect, useState } from 'react'
+import  { useContext, useState } from 'react'
 import { schema, FormData } from '../CreateNewCard/CreateCard'
 import cardsService from '../../services/cards-service'
 import { useForm } from 'react-hook-form'
@@ -34,6 +34,7 @@ const EditCard = () => {
        
      })
      .catch((err) => {
+       console.log(err);
        setGeneralError(
          "An error occurred while updating the card. Please try again."
        );

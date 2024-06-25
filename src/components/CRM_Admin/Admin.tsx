@@ -4,7 +4,7 @@ import { AuthContext } from '../../contexts/AuthContext'
 import { UserResponse } from '../../@types/types'
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import { useDate } from '../../contexts/ThemeContext';
-import './Admin.scss'
+
 const Admin = () => {
   const {theme}=useDate()
 const {token}=useContext(AuthContext)

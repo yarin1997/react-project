@@ -1,6 +1,6 @@
-import { FieldValues, useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import userService from "../services/user-service";
-import { ErrorInfo, useState,useEffect } from "react";
+import {  useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -46,7 +46,6 @@ const Login = () => {
   };
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [rejected, setRejected] = useState(0);
   const [blocked, setBlocked] = useState<blockedType[]>(() => {
     const storedBlocked = localStorage.getItem("blocked");
@@ -87,12 +86,12 @@ const Login = () => {
   const onLogin = (data: LoginType) => {
     const { email, password } = data;
    if (checkBlocked()) {
+    toast.dismiss();
      toast.error("user is block");
       return;
     }
     if (email && password) {
       setLoading(true);
-      setError(null);
       userService
         .login(email, password)
         .then((res) => {
@@ -107,9 +106,9 @@ const Login = () => {
           }
         })
         .catch((err) => {
-          setError(err);
           console.log("err" + err, "email" + email);
           setRejected((prev) => prev + 1);
+          toast.dismiss();
           toast.error("Login failed!");
         })
         .finally(() => {
@@ -125,7 +124,8 @@ const Login = () => {
       const updatedBlocked = [...blocked, blockedUser];
       setBlocked(updatedBlocked);
       localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
-      toast.error("You have been blocked for 15 seconds");
+      toast.dismiss();
+      toast.error(`You have been blocked for ${(time)} seconds`);
       setRejected(0);
     }
   }, [rejected]);
@@ -137,7 +137,6 @@ const Login = () => {
       return Number(u.time)+blockDuration > Date.now();
     });
     setBlocked(updatedBlocked);
-    console.log(updatedBlocked);
     localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
   }, []); 
 

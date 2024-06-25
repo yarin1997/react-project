@@ -49,14 +49,14 @@ const About = () => {
       <p>
         The user interface is designed to be dynamic and responsive, adapting to
         different screen sizes and providing a smooth user experience. UI
-        components include input fields, buttons, and cards, styled with
-        CSS/Sass and possibly UI libraries like Bootstrap or Material-UI.
+        components include input fields, NabBar, ToggleMode, and cards, styled with
+        CSS/Sass and possibly UI libraries like Bootstrap, TailWind or Material-UI.
       </p>
 
       <h2>Theming and User Preferences</h2>
       <p>
         The project includes features for user preferences, such as dark mode
-        toggling, managed through local storage and custom hooks. CSS/Sass
+        toggling, managed through local storage and custom hooks. Sass
         modules are used for styling, providing a clean and maintainable way to
         manage styles.
       </p>
