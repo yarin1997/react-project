@@ -58,9 +58,9 @@ const ToggleButton=() => {
             >
               BCard
             </NavLink>
-            <a href="/About" className="link anchor">
+            <NavLink to="/About" className="link anchor">
               ABOUT
-            </a>
+            </NavLink>
             {isLoggedIn && (
               <NavLink
                 to="/Favorites"
