@@ -38,7 +38,6 @@ export const AuthContextProvider = ({
   const [isAdmin, setIsAdmin] = useState(false);
   const [_id, setId] = useState("");
   const [token, setToken] = useState("");
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -52,16 +51,22 @@ export const AuthContextProvider = ({
   }, [token]);
 
   const login = (jwt: string) => {
-    setIsLoggedIn(true);
-    localStorage.setItem("token", jwt);
-
-    const decodedToken = jwtDecode<DecodedToken>(jwt);
-    setIsBusiness(decodedToken?.isBusiness);
+    
+       localStorage.setItem("token", jwt);
+          setIsLoggedIn(true);
+       const decodedToken = jwtDecode<DecodedToken>(jwt);
+       setIsBusiness(decodedToken?.isBusiness);
+       setId(decodedToken?._id);
+       setIsAdmin(decodedToken?.isAdmin);
+       setToken(jwt);
   };
   const logout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("token");
-    setToken("");
+      setId("");
+      setIsLoggedIn(false);
+      setToken("");
+      setIsAdmin(false);
+      setIsBusiness(false);
+        localStorage.removeItem("token");
   };
 
   return (

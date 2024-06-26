@@ -1,8 +1,8 @@
-import {useContext, useEffect, useState} from "react";
-import './Cards.scss'
+import { useContext, useEffect, useState } from "react";
+import "./Cards.scss";
 import Card from "../Card/Card";
 import { CardType } from "../../@types/types";
-import {  CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import cardsService from "../../services/cards-service";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useSearch } from "../../contexts/SearchBarContext";
@@ -17,43 +17,43 @@ const Cards = () => {
   const [error, setError] = useState<string | null>(null);
   const search = useSearch();
   const { theme } = useDate();
- 
+
   useEffect(() => {
     setLoading(true);
     const { requests, cancel } = cardsService.getAllCards();
     requests
       .then((response) => {
         let filterCards: CardType[] = [];
-           if (search.value.length > 0) {
-             console.log(search.value);
-             filterCards = response.data.filter((card: CardType) =>
-               card.title.toLowerCase().includes(search.value.toLowerCase())
-             );
-           } else {
-             filterCards = response.data;
-           }
+        if (search.value.length > 0) {
+          console.log(search.value);
+          filterCards = response.data.filter((card: CardType) =>
+            card.title.toLowerCase().includes(search.value.toLowerCase())
+          );
+        } else {
+          filterCards = response.data;
+        }
         setData(filterCards);
         setLoading(false);
         setError(null);
       })
       .catch((error) => {
-       if (error.name === "CanceledError") return;
-       setError(error.message);
-       setLoading(false);
-       toast.error("An error occurred. Please try again later.");
+        if (error.name === "CanceledError") return;
+        setError(error.message);
+        setLoading(false);
+        toast.error("An error occurred. Please try again later.");
       });
-      
+
     return () => {
       cancel();
     };
   }, [search]);
-  if (error) return <div >{error}</div>;
-    if (loading)
-      return (
-        <div className="m-0-auto">
-          <CircularProgress color="secondary" />
-        </div>
-      );
+  if (error) return <div>{error}</div>;
+  if (loading)
+    return (
+      <div className="m-0-auto">
+        <CircularProgress color="secondary" />
+      </div>
+    );
   return (
     <div className="Cards-Container">
       <h1
@@ -83,4 +83,4 @@ const Cards = () => {
     </div>
   );
 };
-export default Cards
+export default Cards;

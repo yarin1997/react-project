@@ -1,6 +1,6 @@
-import {  useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import userService from "../services/user-service";
-import {  useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -18,7 +18,6 @@ interface LoginType {
 interface blockedType {
   email: string;
   time: number;
-
 }
 
 const Login = () => {
@@ -51,7 +50,7 @@ const Login = () => {
     const storedBlocked = localStorage.getItem("blocked");
     return storedBlocked ? JSON.parse(storedBlocked) : ([] as blockedType[]);
   });
-  const blockDuration = 60*1000 ;
+  const blockDuration = 60 * 1000;
   const email = watch("email");
   const [time, setTime] = useState(0);
 
@@ -73,7 +72,7 @@ const Login = () => {
   };
 
   const convertSecondsToTimes = (seconds: number): string => {
-    seconds=seconds/1000;
+    seconds = seconds / 1000;
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
@@ -85,9 +84,9 @@ const Login = () => {
 
   const onLogin = (data: LoginType) => {
     const { email, password } = data;
-   if (checkBlocked()) {
-    toast.dismiss();
-     toast.error("user is block");
+    if (checkBlocked()) {
+      toast.dismiss();
+      toast.error("user is block");
       return;
     }
     if (email && password) {
@@ -125,7 +124,7 @@ const Login = () => {
       setBlocked(updatedBlocked);
       localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
       toast.dismiss();
-      toast.error(`You have been blocked for ${(time)} seconds`);
+      toast.error(`You have been blocked for ${time} seconds`);
       setRejected(0);
     }
   }, [rejected]);
@@ -134,11 +133,11 @@ const Login = () => {
     const storedBlocked = JSON.parse(localStorage.getItem("blocked") ?? "[]");
     const updatedBlocked = storedBlocked.filter((u: blockedType) => {
       console.log(u);
-      return Number(u.time)+blockDuration > Date.now();
+      return Number(u.time) + blockDuration > Date.now();
     });
     setBlocked(updatedBlocked);
     localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
-  }, []); 
+  }, []);
 
   return (
     <div className="h-screen d-flex flex-column gap-3  w-100 align-items-center">
@@ -202,7 +201,7 @@ const Login = () => {
         )}
         <button
           className="btn btn-primary"
-          disabled={!isValid  || loading}
+          disabled={!isValid || loading}
           type="submit"
         >
           {loading ? <CircularProgress /> : "Login"}

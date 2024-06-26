@@ -1,27 +1,27 @@
-import {  useContext, useEffect, useState } from 'react'
-import './Card.scss'
- import { CardType } from '../../@types/types';
- import { AuthContext } from '../../contexts/AuthContext';
-  import FavoriteIcon from "@mui/icons-material/Favorite";
-  import DeleteIcon from "@mui/icons-material/Delete";
-   import { BsTelephone } from "react-icons/bs";
-import cardsService from '../../services/cards-service';
+import { useContext, useEffect, useState } from "react";
+import "./Card.scss";
+import { CardType } from "../../@types/types";
+import { AuthContext } from "../../contexts/AuthContext";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { BsTelephone } from "react-icons/bs";
+import cardsService from "../../services/cards-service";
 import { useDate } from "../../contexts/ThemeContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 
-export type CardProps= {
-    image: {
-        url: string;
-        alt: string;
-        _id: string;
-    }
-    title: string;
-    description: string;
-    phone: string;
-    adress: string;
-    cardNumber:number;
-}
+export type CardProps = {
+  image: {
+    url: string;
+    alt: string;
+    _id: string;
+  };
+  title: string;
+  description: string;
+  phone: string;
+  adress: string;
+  cardNumber: number;
+};
 export type CardProps2 = {
   card: CardType;
   myCards?: CardType[];
@@ -29,8 +29,7 @@ export type CardProps2 = {
 };
 
 const Card = ({ card, myCards, setMyCards }: CardProps2) => {
-  const { isLoggedIn, isAdmin, _id, token } =
-    useContext(AuthContext);
+  const { isLoggedIn, isAdmin, _id, token } = useContext(AuthContext);
   const { _id: cardId, image, title, description, phone, address } = card;
   const { theme } = useDate();
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
@@ -43,13 +42,12 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
         else setIsFavorite(false);
       })
       .catch((error) => console.log(error));
-     
   }, []);
 
   const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     e.currentTarget.src =
       "https://www.computerhope.com/issues/pictures/default.png";
-      setAlt("default.png")
+    setAlt("default.png");
   };
   const handleLikeClick = () => {
     const newIsFavorite = !isFavorite;
@@ -58,7 +56,6 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
       .likeUnlikeCard(cardId, token)
       .then((response) => {
         console.log(response);
-
       })
       .catch((error) => {
         console.log(error);
@@ -67,14 +64,14 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
   };
   const navigate = useNavigate();
   const handleDivClick = () => {
-    const dataToPass = { key: card }; 
+    const dataToPass = { key: card };
     navigate("/CardInfo", { state: dataToPass });
   };
   const handleUpdateCard = () => {
-    const dataToPass = { key: card }; 
+    const dataToPass = { key: card };
     navigate("/EditCard", { state: dataToPass });
   };
-const handleDelete = () => {
+  const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this card?")) {
       cardsService
         .deleteCard(cardId, token, card.bizNumber)
@@ -88,11 +85,11 @@ const handleDelete = () => {
         })
         .catch((error) => console.log(error));
     }
-};
+  };
   return (
     <div
       className={`Card-Container cursor-pointer  ${
-        theme === "dark" ? "bg-gray-800 text-white" :"bg-white text-gray-800"
+        theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
       }`}
     >
       <img
@@ -142,4 +139,4 @@ const handleDelete = () => {
     </div>
   );
 };
-export default Card
+export default Card;
