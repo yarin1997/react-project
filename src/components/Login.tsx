@@ -27,7 +27,7 @@ const Login = () => {
     register,
     watch,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors},
   } = useForm<LoginType>({ mode: "onChange" });
 
   const [password, setPassword] = useState<string>("");
@@ -158,21 +158,7 @@ const Login = () => {
           <input
             className="form-control relative "
             {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters long",
-              },
-              maxLength: {
-                value: 20,
-                message: "Password must be at most 20 characters long",
-              },
-              pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=(.*\d){3,})(?=.*[)!@%$#^&*-_]).{8,}$/,
-                message:
-                  "Password must include at least one lowercase letter, one uppercase letter, four digits, and one special character (!@%$#^&*-_)",
-              },
+              required:true, 
             })}
             type={type}
             name="password"
@@ -201,7 +187,7 @@ const Login = () => {
         )}
         <button
           className="btn btn-primary"
-          disabled={!isValid || loading}
+          disabled={ loading}
           type="submit"
         >
           {loading ? <CircularProgress /> : "Login"}
