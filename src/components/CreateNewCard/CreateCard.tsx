@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { AuthContext } from "../../contexts/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDate } from "../../contexts/ThemeContext";
 export const schema = z.object({
   title: z
     .string({ invalid_type_error: "Title is required" })
@@ -86,6 +87,7 @@ const CreateCard= () => {
   const{token}=useContext(AuthContext)
 const navigate = useNavigate();
 const [loading, setLoading] = useState(false);
+const {theme}=useDate()
   const onSubmit = (data: FormData) => {
     setLoading(true);
    cardsService.addCard(data,token).then(res=>{
@@ -101,10 +103,10 @@ setTimeout(()=>{navigate("/myCards")},1500)
   };
 
   return (
-    <div className="container">
-      <h1 className="text-center p-2">Create Card</h1>
+    <div className={`container ${theme==="dark"?"bg-gray-800 text-white":"bg-white text-gray-800"}`}>
+      <h1 className="text-center text-3xl p-1 mb-3">Create Card</h1>
       <form
-        className="grid md:grid-cols-2  gap-2 w-3/5 text-center m-auto grid-cols-1"
+        className={`grid md:grid-cols-2  gap-3 w-3/5 text-center m-auto grid-cols-1 `}
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="form-group">
@@ -213,7 +215,7 @@ setTimeout(()=>{navigate("/myCards")},1500)
           )}
         </div>
 
-        <div className="form-group">
+        <div className="form-group mb-6">
           <label>Zip</label>
           <input
             type="number"
@@ -224,10 +226,15 @@ setTimeout(()=>{navigate("/myCards")},1500)
             <p className="text-danger">{errors.address.zip.message}</p>
           )}
         </div>
-
-        <button disabled={!isValid || loading} type="submit" className="btn btn-primary">
-         {loading? <CircularProgress/>: 'Submit'}
-        </button>
+        <div className="md:col-span-2 flex justify-center ">
+          <button
+            disabled={!isValid || loading}
+            type="submit"
+            className="btn btn-primary w-1/2"
+          >
+            {loading ? <CircularProgress /> : "Submit"}
+          </button>
+        </div>
         <ToastContainer />
       </form>
     </div>

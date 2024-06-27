@@ -7,11 +7,11 @@ const Root =()=>{
 
     return (
       <div
-        className={`flex flex-col gap-10  text-blue-500  ${
+        className={`flex flex-col gap-10  text-blue-500 ${
           theme === "dark" ? "bg-gray-800" : "bg-white"
         }`}
       >
-        <Header  />
+        <Header />
         <main className=" w-11/12 m-auto ">
           <Outlet />
         </main>

@@ -47,7 +47,7 @@ const Favorite = () => {
   }
 
   return (
-    <>
+    <div>
       <h1
         className={`text-center fw-bold text-3xl m-2 ${
           theme === "dark" ? "text-white bg-gray-800" : "text-gray-800 bg-white"
@@ -55,14 +55,15 @@ const Favorite = () => {
       >
         Favorite
       </h1>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      {favCards.length === 0 ? <p className="text-center h-screen">No favorite cards found</p>
+      :<div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
         {favCards.length === 0 ? (
-          <p>No favorite cards found</p>
+          <p className="text-center">No favorite cards found</p>
         ) : (
           favCards.map((card) => <Card key={card._id} card={card} />)
         )}
-      </div>
-    </>
+      </div>}
+    </div>
   );
 };
 

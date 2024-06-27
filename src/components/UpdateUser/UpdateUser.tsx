@@ -9,6 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
+import { useDate } from "../../contexts/ThemeContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const updateUserSchema = z.object({
@@ -82,7 +83,7 @@ const UpdateUser = () => {
   });
   const navigate = useNavigate();
   const { token, _id } = useContext(AuthContext);
- 
+ const {theme}=useDate()
    const [loading, setLoading] = useState(false);
    const [generalError, setGeneralError] = useState("");
     
@@ -118,166 +119,179 @@ const UpdateUser = () => {
   };
 
   return (
-    <form
-      className="flex flex-col justify-center items-center gap-3 "
-      onSubmit={handleSubmit(onSubmit)}
+      <form
+    className={`flex flex-col justify-center items-center gap-3${theme === "dark" ? " bg-gray-800 text-white" : " bg-white text-gray-800"} text-2xl`}
+    onSubmit={handleSubmit(onSubmit)}
+  >
+    <h1 className="text-3xl">Update User</h1>
+    <div className="formContainer">
+      <div className="flex flex-col mb-3">
+        <label className="text-center">First Name *</label>
+        <input
+          {...register("name.first")}
+          type="text"
+          placeholder="First Name *"
+          className="form-control"
+          defaultValue={inputValue.name?.first}
+        />
+        {errors.name?.first && (
+          <p className="text-danger">{errors.name?.first.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Middle Name</label>
+        <input
+          {...register("name.middle")}
+          type="text"
+          placeholder="Middle Name"
+          className="form-control"
+          defaultValue={inputValue.name?.middle}
+        />
+        {errors.name?.middle && (
+          <p className="text-danger">{errors.name?.middle.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Last Name *</label>
+        <input
+          {...register("name.last")}
+          type="text"
+          placeholder="Last Name *"
+          className="form-control"
+          defaultValue={inputValue.name?.last}
+        />
+        {errors.name?.last && (
+          <p className="text-danger">{errors.name?.last.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Phone Number *</label>
+        <input
+          {...register("phone")}
+          type="text"
+          placeholder="Phone Number *"
+          className="form-control"
+          defaultValue={inputValue.phone}
+        />
+        {errors.phone && (
+          <p className="text-danger">{errors.phone.message}</p>
+        )}
+      </div>
+    </div>
+    <div className="mt-8 formContainer">
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Img-Url</label>
+        <input
+          {...register("image.url")}
+          type="text"
+          placeholder="Img-Url"
+          className="form-control"
+          defaultValue={inputValue.image?.url}
+        />
+        {errors.image?.url && (
+          <p className="text-danger">{errors.image?.url.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Img-Alt</label>
+        <input
+          {...register("image.alt")}
+          type="text"
+          placeholder="Img-Alt"
+          className="form-control"
+          defaultValue={inputValue.image?.alt}
+        />
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">State</label>
+        <input
+          {...register("address.state")}
+          type="text"
+          placeholder="State"
+          className="form-control"
+          defaultValue={inputValue.address?.state}
+        />
+        {errors.address?.state && (
+          <p className="text-danger">{errors.address?.state.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Country *</label>
+        <input
+          {...register("address.country")}
+          type="text"
+          placeholder="Country *"
+          className="form-control"
+          defaultValue={inputValue.address?.country}
+        />
+        {errors.address?.country && (
+          <p className="text-danger">{errors.address?.country.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">City *</label>
+        <input
+          {...register("address.city")}
+          type="text"
+          placeholder="City *"
+          className="form-control"
+          defaultValue={inputValue.address?.city}
+        />
+        {errors.address?.city && (
+          <p className="text-danger">{errors.address?.city.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Street *</label>
+        <input
+          {...register("address.street")}
+          type="text"
+          placeholder="Street *"
+          className="form-control"
+          defaultValue={inputValue.address?.street}
+        />
+        {errors.address?.street && (
+          <p className="text-danger">{errors.address?.street.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">House Number *</label>
+        <input
+          {...register("address.houseNumber", { valueAsNumber: true })}
+          type="text"
+          placeholder="House Number *"
+          className="form-control"
+          defaultValue={inputValue.address?.houseNumber}
+        />
+        {errors.address?.houseNumber && (
+          <p className="text-danger">{errors.address?.houseNumber.message}</p>
+        )}
+      </div>
+      <div className="flex flex-col mb-3">
+        <label className="text-center">Zip Code</label>
+        <input
+          {...register("address.zip", { valueAsNumber: true })}
+          type="text"
+          placeholder="Zip Code"
+          className="form-control"
+          defaultValue={inputValue.address?.zip}
+        />
+        {errors.address?.zip && (
+          <p className="text-danger">{errors.address?.zip.message}</p>
+        )}
+      </div>
+    </div>
+    <button
+      type="submit"
+      disabled={!isValid || loading}
+      className="btn btn-primary"
     >
-      <h1 className="fs-3 ">Update User</h1>
-      <div className="formContainer">
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("name.first")}
-            type="text"
-            placeholder="First Name *"
-            className="form-control"
-            defaultValue={inputValue.name?.first}
-          />
-          {errors.name?.first && (
-            <p className="text-danger">{errors.name?.first.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("name.middle")}
-            type="text"
-            placeholder="Middle Name"
-            className="form-control"
-            defaultValue={inputValue.name?.middle}
-          />
-          {errors.name?.middle && (
-            <p className="text-danger">{errors.name?.middle.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("name.last")}
-            type="text"
-            placeholder="Last Name *"
-            className="form-control"
-            defaultValue={inputValue.name?.last}
-          />
-          {errors.name?.last && (
-            <p className="text-danger">{errors.name?.last.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("phone")}
-            type="text"
-            placeholder="Phone Number *"
-            className="form-control"
-            defaultValue={inputValue.phone}
-          />
-          {errors.phone && (
-            <p className="text-danger">{errors.phone.message}</p>
-          )}
-        </div>
-      </div>
-      <div className="mt-8 formContainer">
-        <div className=" d-flex flex-column mb-3">
-          <input
-            {...register("image.url")}
-            type="text"
-            placeholder="Img-Url"
-            className="form-control"
-            defaultValue={inputValue.image?.url}
-          />
-          {errors.image?.url && (
-            <p className="text-danger">{errors.image?.url.message}</p>
-          )}
-        </div>
-        <div className=" d-flex flex-column mb-3">
-          <input
-            {...register("image.alt")}
-            type="text"
-            placeholder="Img-Alt"
-            className="form-control"
-            defaultValue={inputValue.image?.alt}
-          />
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.state")}
-            type="text"
-            placeholder="State"
-            className="form-control"
-            defaultValue={inputValue.address?.state}
-          />
-          {errors.address?.state && (
-            <p className="text-danger">{errors.address?.state.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.country")}
-            type="text"
-            placeholder="Country *"
-            className="form-control"
-            defaultValue={inputValue.address?.country}
-          />
-          {errors.address?.country && (
-            <p className="text-danger">{errors.address?.country.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.city")}
-            type="text"
-            placeholder="City *"
-            className="form-control"
-            defaultValue={inputValue.address?.city}
-          />
-          {errors.address?.city && (
-            <p className="text-danger">{errors.address?.city.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.street")}
-            type="text"
-            placeholder="Street *"
-            className="form-control"
-            defaultValue={inputValue.address?.street}
-          />
-          {errors.address?.street && (
-            <p className="text-danger">{errors.address?.street.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.houseNumber", { valueAsNumber: true })}
-            type="text"
-            placeholder="House Number *"
-            className="form-control"
-            defaultValue={inputValue.address?.houseNumber}
-          />
-          {errors.address?.houseNumber && (
-            <p className="text-danger">{errors.address?.houseNumber.message}</p>
-          )}
-        </div>
-        <div className="d-flex flex-column mb-3">
-          <input
-            {...register("address.zip", { valueAsNumber: true })}
-            type="text"
-            placeholder="Zip Code"
-            className="form-control"
-            defaultValue={inputValue.address?.zip}
-          />
-          {errors.address?.zip && (
-            <p className="text-danger">{errors.address?.zip.message}</p>
-          )}
-        </div>
-      </div>
-      <button
-        type="submit"
-        disabled={!isValid || loading}
-        className="btn btn-primary"
-      >
-        {loading ? <CircularProgress /> : "Update"}
-      </button>
-      {generalError && <p className="text-danger">{generalError}</p>}
-      <ToastContainer />
-    </form>
+      {loading ? <CircularProgress /> : "Update"}
+    </button>
+    {generalError && <p className="text-danger">{generalError}</p>}
+    <ToastContainer />
+  </form>
+
   );
 };
 
