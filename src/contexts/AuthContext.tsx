@@ -1,5 +1,5 @@
 import { jwtDecode } from "jwt-decode";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState,  } from "react";
 
 
 interface AuthContextType {
@@ -38,35 +38,34 @@ export const AuthContextProvider = ({
   const [isAdmin, setIsAdmin] = useState(false);
   const [_id, setId] = useState("");
   const [token, setToken] = useState("");
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-      const decodedToken = jwtDecode<DecodedToken>(token);
-      setIsBusiness(decodedToken?.isBusiness);
-      setIsAdmin(decodedToken?.isAdmin);
-      setId(decodedToken?._id);
-      setToken(token);
-    }
-  }, [token]);
+   const decodeToken = (jwt: string) => {
+     const decodedToken = jwtDecode<DecodedToken>(jwt);
+     setIsBusiness(decodedToken?.isBusiness);
+     setIsAdmin(decodedToken?.isAdmin);
+     setId(decodedToken?._id);
+     setToken(jwt);
+   };
 
-  const login = (jwt: string) => {
-    
-       localStorage.setItem("token", jwt);
-          setIsLoggedIn(true);
-       const decodedToken = jwtDecode<DecodedToken>(jwt);
-       setIsBusiness(decodedToken?.isBusiness);
-       setId(decodedToken?._id);
-       setIsAdmin(decodedToken?.isAdmin);
-       setToken(jwt);
-  };
+   useEffect(() => {
+     const storedToken = localStorage.getItem("token");
+     if (storedToken) {
+       setIsLoggedIn(true);
+       decodeToken(storedToken);
+     }
+   }, []);
+
+   const login = (jwt: string) => {
+     localStorage.setItem("token", jwt);
+     setIsLoggedIn(true);
+     decodeToken(jwt);
+   };
   const logout = () => {
       setId("");
       setIsLoggedIn(false);
       setToken("");
       setIsAdmin(false);
       setIsBusiness(false);
-        localStorage.removeItem("token");
+      localStorage.removeItem("token");
   };
 
   return (

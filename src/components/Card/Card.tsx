@@ -9,6 +9,7 @@ import cardsService from "../../services/cards-service";
 import { useDate } from "../../contexts/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import React from "react";
 
 export type CardProps = {
   image: {
@@ -50,7 +51,7 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
     setAlt("default.png");
   };
   const handleLikeClick = () => {
-    const newIsFavorite = !isFavorite;
+    const newIsFavorite = isFavorite;
     setIsFavorite(!isFavorite);
     cardsService
       .likeUnlikeCard(cardId, token)
@@ -59,7 +60,7 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
       })
       .catch((error) => {
         console.log(error);
-        setIsFavorite(!newIsFavorite);
+        setIsFavorite(newIsFavorite);
       });
   };
   const navigate = useNavigate();

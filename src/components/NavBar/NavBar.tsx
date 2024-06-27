@@ -15,28 +15,34 @@ const { isLoggedIn, isBusiness,isAdmin,  logout } = useContext(AuthContext);
 const {theme}=useDate()
 const [isOpen, setIsOpen] = useState(false);
 const [loc,setLoc]=useState("")
-  const location = useLocation().pathname;
+const location = useLocation().pathname;
+ const navigate = useNavigate();
 useEffect(() => {
   setLoc(location)
 },[location])
 const ToggleButton=() => {
   setIsOpen(!isOpen);
 }
- const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 0;
-      setScrolled(isScrolled);
-    };
+ const [scrolled, setScrolled] = useState(false);
+ useEffect(() => {
+   let scrollTimeout: number;
+   const handleScroll = () => {
+     setScrolled(true);
+     window.clearTimeout(scrollTimeout);
+     scrollTimeout = window.setTimeout(() => {
+       setScrolled(false);
+     }, 1000);
+   };
 
-    window.addEventListener("scroll", handleScroll);
+   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+   return () => {
+     window.removeEventListener("scroll", handleScroll);
+   };
+ }, []);
+  
+
 
     return (
       <nav className="  ">
@@ -137,7 +143,7 @@ const ToggleButton=() => {
           {isOpen && (
             <div
               className={`menu-items ${
-                scrolled ? "bg-transparent" : "bg-light"
+                scrolled ? "bg-light opacity-25" : "bg-light"
               }`}
               style={{
                 position: "absolute",

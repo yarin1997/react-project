@@ -22,3 +22,8 @@
 span{
     @apply font-bold underline text-lg
 }
+
+@media screen and (max-width: 768px) {
+    .Card-Container:hover{    
+transform: none;
+}}
