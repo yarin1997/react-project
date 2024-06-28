@@ -53,6 +53,7 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
   const handleLikeClick = () => {
     const newIsFavorite = isFavorite;
     setIsFavorite(!isFavorite);
+    console.log(cardId, "token:" + token);
     cardsService
       .likeUnlikeCard(cardId, token)
       .then((response) => {
