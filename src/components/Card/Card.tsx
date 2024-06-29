@@ -51,17 +51,14 @@ const Card = ({ card, myCards, setMyCards }: CardProps2) => {
     setAlt("default.png");
   };
   const handleLikeClick = () => {
-    const newIsFavorite = isFavorite;
-    setIsFavorite(!isFavorite);
-    console.log(cardId, "token:" + token);
     cardsService
       .likeUnlikeCard(cardId, token)
       .then((response) => {
+         setIsFavorite(!isFavorite);
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
-        setIsFavorite(newIsFavorite);
       });
   };
   const navigate = useNavigate();

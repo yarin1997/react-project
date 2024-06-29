@@ -63,6 +63,11 @@ const Login = () => {
       for (let i = 0; i < blocked.length; i++) {
         if (blocked[i].email === email) {
           const restTime = rest(blocked[i].time);
+          if (restTime <= 0) {
+            setBlocked((prev) => prev.filter((u) => u.email !== email));
+            localStorage.setItem("blocked", JSON.stringify([]));
+            return false;
+          }
           setTime(restTime > 0 ? restTime : 0);
           return true;
         }
@@ -70,18 +75,26 @@ const Login = () => {
     }
     return false;
   };
+    useEffect(() => {
+      const storedBlocked = JSON.parse(localStorage.getItem("blocked") ?? "[]");
+      const updatedBlocked = storedBlocked.filter((u: blockedType) => {
+        return Number(u.time) + blockDuration > Date.now();
+      });
+      setBlocked(updatedBlocked);
+      localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
+    }, []);
 
   const convertSecondsToTimes = (seconds: number): string => {
-    seconds = seconds / 1000;
+    seconds = Math.floor(seconds/1000); // Ensure `seconds` is an integer
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
+    const secs = Math.floor(seconds % 60);
     const paddedHours = String(hours).padStart(2, "0");
     const paddedMinutes = String(minutes).padStart(2, "0");
-    const paddedSeconds = String(secs).padStart(2, "0");
+    const paddedSeconds = String(secs).padStart(2, "0")
     return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
   };
-
+  
   const onLogin = (data: LoginType) => {
     const { email, password } = data;
     if (checkBlocked()) {
@@ -94,14 +107,16 @@ const Login = () => {
       userService
         .login(email, password)
         .then((res) => {
+          console.log(res.data);
           login(res.data);
           if (res) {
             setRejected(0);
             toast.success("Login successful");
+            
             setTimeout(() => {
               navigate("/");
+               window.location.reload();
             }, 1000);
-            console.log(res.data);
           }
         })
         .catch((err) => {
@@ -113,9 +128,7 @@ const Login = () => {
         .finally(() => {
           setLoading(false);
         });
-    }
-  };
-
+    }};
   useEffect(() => {
     if (rejected >= 3) {
       const currentTime = Date.now();
@@ -123,22 +136,19 @@ const Login = () => {
       const updatedBlocked = [...blocked, blockedUser];
       setBlocked(updatedBlocked);
       localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
+      setTime(rest(blockedUser.time));
       toast.dismiss();
-      toast.error(`You have been blocked for ${time} seconds`);
+      toast.error(`You have been blocked `);
       setRejected(0);
     }
   }, [rejected]);
+ useEffect(() => {
+   const timer = setInterval(() => {
+     setTime((prevTime) => prevTime - 1000);
+   }, 1000);
 
-  useEffect(() => {
-    const storedBlocked = JSON.parse(localStorage.getItem("blocked") ?? "[]");
-    const updatedBlocked = storedBlocked.filter((u: blockedType) => {
-      console.log(u);
-      return Number(u.time) + blockDuration > Date.now();
-    });
-    setBlocked(updatedBlocked);
-    localStorage.setItem("blocked", JSON.stringify(updatedBlocked));
-  }, []);
-
+   return () => clearInterval(timer); 
+ }, []);
   return (
     <div className="h-screen d-flex flex-column gap-3  w-100 align-items-center">
       <h1 className="fw-bold fs-1 ">Login</h1>
@@ -171,16 +181,16 @@ const Login = () => {
             onClick={handleToggle}
           >
             {icon === eye ? (
-              <Icon className="absolute mr-6" icon={eye} size={20} />
+              <Icon className="absolute mr-8 mb-1" icon={eye} size={20} />
             ) : (
-              <Icon className="absolute mr-6" icon={eyeOff} size={20} />
+              <Icon className="absolute mr-8 mb-1" icon={eyeOff} size={20} />
             )}
           </span>
         </div>
         {errors.password && (
           <p className="text-danger">{errors.password.message}</p>
         )}
-        {time > 0 && (
+        {time > 0 &&  (
           <p className="text-danger">
             You are blocked for {convertSecondsToTimes(time)}
           </p>

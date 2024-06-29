@@ -58,7 +58,12 @@ export const AuthContextProvider = ({
    const login = (jwt: string) => {
      localStorage.setItem("token", jwt);
      setIsLoggedIn(true);
-     decodeToken(jwt);
+     const decodedToken = jwtDecode<DecodedToken>(jwt);
+     setId(decodedToken?._id);
+     setIsBusiness(decodedToken?.isBusiness);
+     setIsAdmin(decodedToken?.isAdmin);
+     setToken(jwt);
+     
    }
    
   const logout = () => {
@@ -69,18 +74,7 @@ export const AuthContextProvider = ({
       setIsBusiness(false);
       localStorage.removeItem("token");
   };
-
-   useEffect(() => {
-     const handleBeforeUnload = () => {
-       logout();
-     };
-
-     window.addEventListener("beforeunload", handleBeforeUnload);
-
-     return () => {
-       window.removeEventListener("beforeunload", handleBeforeUnload);
-     };
-   }, [logout]);
+  
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, isBusiness,isAdmin, login, logout, _id,token }}>
